@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { THEMES } from "../_constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { CircleOff, Cloud, Github, Laptop, Moon, Palette, Sun } from "lucide-react";
+import useMounted from "@/hooks/useMounted";
 
 const THEME_ICONS: Record<string, React.ReactNode> = {
   "vs-dark": <Moon className="size-4" />,
@@ -16,7 +17,7 @@ const THEME_ICONS: Record<string, React.ReactNode> = {
 
 function ThemeSelector() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const { theme, setTheme } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentTheme = THEMES.find((t) => t.id === theme);
@@ -30,11 +31,6 @@ function ThemeSelector() {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-  
-  // For hydration error. Server is returning one thing and client local storage is updating it.
-  useEffect(() => {
-    setMounted(true);
   }, []);
 
   if (!mounted) return null;
