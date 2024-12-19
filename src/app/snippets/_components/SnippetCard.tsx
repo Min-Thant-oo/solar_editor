@@ -18,6 +18,11 @@ function SnippetCard({ snippet }: { snippet: Snippet }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
+    const confirmed = window.confirm("Are you sure you want to delete this snippet?");
+    if (!confirmed) {
+      return;
+    }
+
     setIsDeleting(true);
 
     try {
