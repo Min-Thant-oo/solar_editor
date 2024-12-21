@@ -4,8 +4,6 @@ import { Zap } from "lucide-react";
 import { useState } from "react";
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation'
-import { useMutation } from 'convex/react';
-import { api } from "../../../../convex/_generated/api";
 import createStripeCheckoutSession from "@/actions/createStripeCheckoutSession";
 
 export default function UpgradeButton() {
