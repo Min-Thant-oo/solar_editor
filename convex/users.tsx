@@ -45,9 +45,8 @@ export const getUser = query({
 export const upgradeToPro = mutation({
   args: {
     email: v.string(),
-    lemonSqueezyCustomerId: v.string(),
-    lemonSqueezyOrderId: v.string(),
-    amount: v.number(),
+    stripeOrderId: v.string(),
+    // amount: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const user = await ctx.db
@@ -60,8 +59,7 @@ export const upgradeToPro = mutation({
     await ctx.db.patch(user._id, {
       isPro: true,
       proSince: Date.now(),
-      lemonSqueezyCustomerId: args.lemonSqueezyCustomerId,
-      lemonSqueezyOrderId: args.lemonSqueezyOrderId,
+      stripeOrderId: args.stripeOrderId,
     });
 
     return { success: true };
