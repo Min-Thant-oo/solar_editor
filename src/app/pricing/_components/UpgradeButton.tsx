@@ -12,7 +12,6 @@ export default function UpgradeButton() {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const { user } = useUser();
-    const upgradeToPro = useMutation(api.users.upgradeToPro);
 
     const handlePurchase = async () => {
         if (!user) return;
